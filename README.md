@@ -40,13 +40,17 @@ Everything can be found in the DataCollection folder, and my dataset is availabl
 ### Key Insights:
 
  * Clickbait Videos are much more likely to have a lot less balanced video statistics due to their weaker correlations
-
+    ![](clickbait.png) ![](nonclickbait.png)
+    
  * Clickbait Videos have a much wider distribution of dislikes, which makes sense as the viewer is likely to dislike a video after being mislead by its title and thumbnail.
     * Thus, Clickbait videos also have a significantly smaller distribution of Dislikes/Likes than non-clickbait videos
     
 * Clickbait titles will usually contain attention-grabbing verbs such as belive, caught, hack, prank to form titles like the classic: You Won't Belive! or Prank/Hack Gone Wrong
+![](clickbaittokens.png)
 
-    * While NonClickbait titles will have more mild nouns usually such as highlights, games, and official
+   * While NonClickbait titles will have more mild nouns usually such as highlights, games, and official
+   ![](nonclickbaittokens.png)
+   
 * Key indicators of a clickbait thumbnail are often the use of brightly-colored arrows or circles, a strongly emotional or suprised facial expression of the video creator, contrasting primary colors, and a very unusual/unrealistic preview of the content which is often photoshopped
 
     * Non-Clickbait thumbnails are typically identified as having one or none of the features mentioned in the Clickbait thumbnails
