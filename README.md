@@ -11,6 +11,13 @@ Since clickbait may be interpreted differently by different people, the definiti
 
 ### Objective: Reduce time and save attention waisted watching misleading YouTube videos.
 
+Main Notebooks to check out:
+* Data Exploration
+* Data Preprocessing & ML estimators
+* Title Classifier
+* Ensembling the Final Model
+
+
 ## Getting the Data
 
 
@@ -23,7 +30,6 @@ A clickbait video was determined by its title and thumbnail combination, and was
 Everything can be found in the DataCollection folder, and my dataset is available on Kaggle.
 
 ## [Dataset Link](https://www.kaggle.com/thelazyaz/youtube-clickbait-classification):
-
 
 ### Data Collected:
 
@@ -51,7 +57,9 @@ Everything can be found in the DataCollection folder, and my dataset is availabl
    * While NonClickbait titles will have more mild nouns usually such as highlights, games, and official
    ![](nonclickbaittokens.png)
    
-* Key indicators of a clickbait thumbnail are often the use of brightly-colored arrows or circles, a strongly emotional or suprised facial expression of the video creator, contrasting primary colors, and a very unusual/unrealistic preview of the content which is often photoshopped
+* Key indicators of a clickbait thumbnail are often the use of brightly-colored arrows or circles, a strongly emotional or suprised facial expression of the video creator, contrasting primary colors, and a very unusual/unrealistic preview of the content which is often photoshopped:
+![](clickbait.jpg)
+
 
     * Non-Clickbait thumbnails are typically identified as having one or none of the features mentioned in the Clickbait thumbnails
 
@@ -59,39 +67,29 @@ Everything can be found in the DataCollection folder, and my dataset is availabl
 
 ## Data Preprocessing & Feature Engineering:
 
-- Views, Likes, Dislikes, Dislike/Like Ratio, Favorites(maybe remove?)
+Created a new feature: Dislike to like Ratio as a higher dislike count is often correlated with clickbait video. All of the statistics are scaled to a normal distribution and shuffled randomly. Other video metadata such as ID and Favorites are removed. Non-ascii characters such as emojis are removed from any title as you can't name files with non-ascii characters on windows file systems. 
 
-- Video Title (consider using news headlines)
 
-ML Models:
+## Machine Learning Models
 
-- Ensemble of ML Model estimators using soft voting (as we want to display probabilities on our web app)
-- Feedforward Neural Network for NLP using the Google Universal Sentence Encoder (an encoder with with 512 dimensional embeddings trained by a DAN encoder for language classification tasks. It is a 1GB model, so it takes a while to load at first) for the first layer, and then a hidden layer followed by an output layer.
-  https://tfhub.dev/google/universal-sentence-encoder/4
+- Ensemble of ML Model estimators (Random Forest, K Nearest Neighbors, Support Vector Classifier, XGBoost, Logisitic Regression, Gaussian Naive Bayes) for Video Statistics Classification using soft voting as we want to display probabilities
+- Feedforward Neural Network for Video Title Classification using the [Google Universal Sentence Encoder](  https://tfhub.dev/google/universal-sentence-encoder/4), an encoder with with 512 dimensional embeddings trained by a DAN encoder for language classification tasks. It is a 1GB model, so it takes a while to load at first.
+
 
 - Combining both with my own custom Ensemble model
-  https://www.montana.edu/rotella/documents/502/Prob_odds_log-odds.pdf <-- Used this to convert logits to logs>
+Used [this](https://www.montana.edu/rotella/documents/502/Prob_odds_log-odds.pdf) to convert logits to logs
 
-**Note**: You may want to remove all emoji's and nonascii characters (and characters that you can't name files with on Windows) as it may have a better accuracy
-
-
-# Skills Learned:
-
-- Fetching & Parsing through JSON data with online API's (YouTube API)
-- Creating a pleasing, yet functional Front End with React.js and Bootstrap CSS
+## Skills Learned:
+- Analyzing distributions and creating correlations for both numerical and natural language data
+- Fetching & Parsing through JSON data with the YouTube API
 - Ensembling Machine Learning Estimators and Tensorflow Hub NLP models together
 
 ## Future Scalability:
 
-- If I had more resources (Infinite YouTube API Requests, more powerful TPUS to train with) then I would use millions and millions of YouTube Videos as training data
-  - Though, you would run into the problem of what I call: "Meta-Clickbait" where the video itself isn't clickbait, but is instead designed to look like clickbait for comedic purposes of making fun of clickbait
+- If I had more resources, such as infinite YouTube API Requests or powerful TPUS to train with, then I would use millions and millions of YouTube Videos as training data
+  - Though, you would run into the problem of having clickbait classified videos that are what I call: "Meta-Clickbait" where the video itself isn't clickbait, but is instead designed to look like clickbait for comedic purposes of making fun of clickbait
 - I could also used Unsupervised Learning to cluster together videos likely/not likely to be clickbait and use them as training examples with Self-Supervised Learning
 - I tried to use the thumbnails as possible training features, however, I've found that I get very low accuracy when using them. This is because there are plenty of videos that appear to be clickbait (have contrasting colors, suprised facial expression, punctual shapes) that aren't actually clickbait but may appear to be depending on the viewer.
+- Analyzing the sentiment of the top 10 most liked and/or pinned comments would likely increase accuracy. 
 
-
-Solution will be used by any YouTube user in the form of a web application. Since more than 70% of YouTube watch time comes from mobile devices, the UI of our web app will be suited to mobile devices (though works fine on desktop)
-There is a paper that examines this issue, but dosen't provide a concrete solution
-Classification problem using supervised learning done online
-Performance is measured using:
-
-- A minimum of 85% accuracy is needed
+A possible software solution could be used by any YouTube user in the form of a web application. Since more than 70% of YouTube watch time comes from mobile devices, the UI of said web app will be suited to mobile devices (though works fine on desktop)
