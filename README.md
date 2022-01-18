@@ -45,7 +45,7 @@ Everything can be found in the DataCollection folder, and my dataset is availabl
 
 ### Key Insights:
 
- * Clickbait Videos are much more likely to have a lot less balanced video statistics due to their weaker correlations
+ * Nonclickbait Videos are much more likely to have a lot less balanced video statistics due to their weaker correlations
     ![](clickbait.png) ![](nonclickbait.png)
     
  * Clickbait Videos have a much wider distribution of dislikes, which makes sense as the viewer is likely to dislike a video after being mislead by its title and thumbnail.
