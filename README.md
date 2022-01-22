@@ -1,6 +1,9 @@
 # YouTube Clickbait Data Analysis
  *Reduce time and save attention waisted watching misleading YouTube videos.*
 
+
+[![](https://img.youtube.com/vi/LLBKqX4xnR8/0.jpg)](https://www.youtube.com/watch?v=LLBKqX4xnR8)
+
 ## Framing the Problem
 
 YouTube has over **2 billion active monthly users** and over 122 million active daily users watching over **a billion hours per day**. As the world's second most visited website with over **26 Billion videos**, it's clear how influential it's become. Videos have 3 major components: a **thumbnail**, a **title**, and videos **statistics** such as likes, dislikes, and views.  
